@@ -24,20 +24,15 @@ namespace OS
             _data[0] = '\0';
         }
 
-        String(const char* c_str) : 
+        String(const char* src) : 
             _data(nullptr), 
             _size(0), 
             _capacity(0) 
         {
-            size_t len = 0;
-
-            while (c_str[len] != '\0') 
-            {
-                len++;
-            }
+            size_t len = strlen(src);
 
             reserve(len + 1);
-            memcpy(_data, c_str, len + 1);
+            memcpy(_data, src, len + 1);
             _size = len;
         }
 
@@ -61,9 +56,10 @@ namespace OS
             if (this != &other) 
             {
                 delete[] _data;
-                _size = other._size;
+                _size     = other._size;
                 _capacity = other._capacity;
-                _data = new char[_capacity];
+                _data     = new char[_capacity];
+
                 memcpy(_data, other._data, _size + 1);
             }
 
@@ -128,7 +124,7 @@ namespace OS
                 reserve(_capacity * 2);
             }
 
-            _data[_size] = c;
+            _data[_size]     = c;
             _data[_size + 1] = '\0';
             _size++;
 
@@ -142,17 +138,17 @@ namespace OS
                 return;
             }
 
-            size_t required_capacity = new_capacity + 1;
-            char* new_data = new char[required_capacity];
+            size_t newCapacity = new_capacity + 1;
+            char* newData      = new char[newCapacity];
 
             if (_data)
             {
-                memcpy(new_data, _data, _size + 1);
+                memcpy(newData, _data, _size + 1);
                 delete[] _data;
             }
 
-            _data = new_data;
-            _capacity = required_capacity;
+            _data     = newData;
+            _capacity = newCapacity;
         }
     };
 

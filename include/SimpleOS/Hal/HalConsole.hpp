@@ -10,8 +10,8 @@ namespace HAL
 	{
 	public:
 		virtual ~IConsole() = default;
-		virtual void Clear() = 0;
-		virtual void Write(char c) = 0;
-		virtual void Write(const char* src) = 0;
+		virtual void Clear() noexcept = 0;
+		virtual void Write(char c) noexcept = 0;
+		virtual void Write(const char* src) noexcept = 0;
 	};
 }

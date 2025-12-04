@@ -6,7 +6,7 @@ using namespace HAL;
 Console::Console() :
     _cursorX(0),
     _cursorY(0),
-    _buffer((uint16_t*)0xB8000)
+    _buffer((uint16_t*)Address)
 {
 }
 
@@ -14,18 +14,18 @@ Console::~Console()
 {
 }
 
-void Console::Clear()
+void Console::Clear() noexcept
 {
-    for (size_t i = 0; i < 80 * 25; i++) 
+    for (size_t i = 0; i < Width * Heigth; i++)
     {
-        Write(' ', i % 80, i / 80);
+        Write(' ', i % Width, i / Width);
     }
 
     _cursorX = 0;
     _cursorY = 0;
 }
 
-void Console::Write(char c)
+void Console::Write(char c) noexcept
 {
     if (c == '\n') 
     {
@@ -37,20 +37,20 @@ void Console::Write(char c)
         Write(c, _cursorX, _cursorY);
         _cursorX++;
 
-        if (_cursorX >= 80)
+        if (_cursorX >= Width)
         {
             _cursorX = 0;
             _cursorY++;
         }
     }
 
-    if (_cursorY >= 25)
+    if (_cursorY >= Heigth)
     {
-        _cursorY = 24;
+        _cursorY = Heigth - 1;
     }
 }
 
-void Console::Write(const char* src)
+void Console::Write(const char* src) noexcept
 {
     while (*src)
     {
@@ -58,7 +58,7 @@ void Console::Write(const char* src)
     }
 }
 
-void Console::Write(char c, uint8_t x, uint8_t y)
+void Console::Write(char c, uint8_t x, uint8_t y) noexcept
 {
-    _buffer[y * 80 + x] = (0x0F << 8) | c;
+    _buffer[y * Width + x] = (0x0F << 8) | c;
 }

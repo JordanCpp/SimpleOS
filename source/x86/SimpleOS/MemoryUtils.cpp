@@ -32,7 +32,21 @@ extern "C"
 
 	void* __memcpy_chk(void* dest, const void* src, size_t len, size_t dstlen)
 	{
+		(void)dstlen;
+
 		return memcpy(dest, src, len);
+	}
+
+	size_t strlen(const char* src)
+	{
+		size_t i = 0;
+
+		while (src[i] != '\0')
+		{
+			i++;
+		}
+
+		return i;
 	}
 }
 

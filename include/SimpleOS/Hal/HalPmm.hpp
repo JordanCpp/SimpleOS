@@ -1,8 +1,7 @@
 
 #pragma once
 
-#include <new>
-#include <cstdint>
+#include <SimpleOS/Hal/HalConfig.hpp>
 
 namespace HAL
 {

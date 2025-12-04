@@ -1,23 +1,23 @@
 
 TARGET = i686-linux-gnu
-CC = $(TARGET)-gcc
-CXX = $(TARGET)-g++
-AS = $(TARGET)-as
-LD = $(TARGET)-ld
+CC     = $(TARGET)-gcc
+CXX    = $(TARGET)-g++
+AS     = $(TARGET)-as
+LD     = $(TARGET)-ld
 
-SRCDIR        = source
-INCDIR        = include
-X86DIR        = source/x86
-SIMPLEOSDIR   = source/SimpleOS
-X86SIMPLEOSDIR= source/x86/SimpleOS
+SRCDIR         = source
+INCDIR         = include
+X86DIR         = source/x86
+SIMPLEOSDIR    = source/SimpleOS
+X86SIMPLEOSDIR = source/x86/SimpleOS
 
-CFLAGS = -ffreestanding -O2 -Wall -Wextra
-CXXFLAGS = -ffreestanding -O2 -Wall -Wextra -fno-exceptions -fno-rtti
+CFLAGS    = -ffreestanding -O2 -Wall -Wextra
+CXXFLAGS  = -ffreestanding -O2 -Wall -Wextra -fno-exceptions -fno-rtti
 CXXFLAGS += -I$(INCDIR) -I$(SRCDIR) -I$(X86DIR) -I$(X86SIMPLEOSDIR)
 
 ASFLAGS = --32
 
-OBJS = boot.o X86Main.o memset.o Kernel.o Console_x86.o Pmm.o BaseAddress.o BumpAllocator.o ExtNew.o
+OBJS = boot.o X86Main.o MemoryUtils.o Kernel.o Console.o Pmm.o BaseAddress.o BumpAllocator.o ExtNew.o
 
 KERNEL = myos.bin
 
@@ -40,10 +40,10 @@ Kernel.o: $(SIMPLEOSDIR)/Kernel.cpp $(SIMPLEOSDIR)/Kernel.hpp
 Pmm.o: $(SIMPLEOSDIR)/Pmm.cpp $(SIMPLEOSDIR)/Pmm.hpp $(X86SIMPLEOSDIR)/Console.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-Console_x86.o: $(X86SIMPLEOSDIR)/Console.cpp $(X86SIMPLEOSDIR)/Console.hpp $(SIMPLEOSDIR)/ExtNew.hpp
+Console.o: $(X86SIMPLEOSDIR)/Console.cpp $(X86SIMPLEOSDIR)/Console.hpp $(SIMPLEOSDIR)/ExtNew.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-memset.o: $(X86SIMPLEOSDIR)/memset.cpp
+MemoryUtils.o: $(X86SIMPLEOSDIR)/MemoryUtils.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 BaseAddress.o: $(X86SIMPLEOSDIR)/BaseAddress.cpp

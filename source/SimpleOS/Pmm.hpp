@@ -4,14 +4,12 @@
 #include <bitset>
 #include <cstddef>
 #include <cstring>
+#include <cstdint>
 #include <SimpleOS/ExtNew.hpp>
 #include <SimpleOS/Hal/HalPmm.hpp>
 
 namespace HAL
 {
-	constexpr size_t MapPage   = 4096;
-	constexpr size_t TotalBits = (4 * 1024 * 1024) / MapPage;
-
 	class Pmm : public IPmm
 	{
 	public:

@@ -10,8 +10,8 @@ namespace HAL
 	public:
 		Console();
 		~Console();
-		void Clear();
-		void Write(char c);
-		void Write(const char* src);
+		void Clear() noexcept;
+		void Write(char c) noexcept;
+		void Write(const char* src) noexcept;
 	};
 }

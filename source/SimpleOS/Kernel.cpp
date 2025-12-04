@@ -1,7 +1,5 @@
-
-
-#include <SimpleOS/STL.hpp>
 #include <SimpleOS/Kernel.hpp>
+#include <SimpleOS/STL/String.hpp>
 #include <SimpleOS/BumpAllocator.hpp>
 #include <SimpleOS/Hal/HalBaseAddress.hpp>
 
@@ -10,22 +8,23 @@ using namespace HAL;
 HAL::IAllocator* MainAllocator = nullptr;
 
 Kernel::Kernel() :
-	_console(nullptr),
 	_pmm(nullptr),
-	_allocator(nullptr)
+	_allocator(nullptr),
+	_console(nullptr)
 {
-	_console   = new (_consoleBuffer)   Console();
 	_pmm       = new (_pmmBuffer)       Pmm(BaseAddress());
 	_allocator = new (_allocatorBuffer) BumpAllocator(_pmm);
 
 	MainAllocator = _allocator;
+
+	_console = std::unique_ptr<HAL::IConsole, NoDelete>(new Console());
 }
 
 Kernel::~Kernel()
 {
-	if (_console)
+	if (_allocator)
 	{
-		_console->~IConsole();
+		_allocator->~IAllocator();
 	}
 
 	if (_pmm)

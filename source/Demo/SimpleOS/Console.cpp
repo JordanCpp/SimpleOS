@@ -12,16 +12,16 @@ Console::~Console()
 {
 }
 
-void Console::Clear()
+void Console::Clear() noexcept
 {
 }
 
-void Console::Write(char c)
+void Console::Write(char c) noexcept
 {
 	std::cout << c;
 }
 
-void Console::Write(const char* src)
+void Console::Write(const char* src) noexcept
 {
 	std::cout << src;
 }

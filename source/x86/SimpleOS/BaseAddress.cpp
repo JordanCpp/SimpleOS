@@ -1,7 +1,8 @@
 
+#include <SimpleOS/Hal/HalConfig.hpp>
 #include <SimpleOS/Hal/HalBaseAddress.hpp>
 
 uintptr_t HAL::BaseAddress()
 {
-	return 0x1700000;
+	return StartAddress;
 }
