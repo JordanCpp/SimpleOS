@@ -2,35 +2,38 @@
 #include <cstdint>
 #include <cstddef>
 
-void* memset(void* buf, int c, size_t len)
+extern "C"
 {
-	uint8_t* p = (uint8_t*)buf;
-
-	while (len--)
+	void* memset(void* buf, int c, size_t len)
 	{
-		*p++ = (uint8_t)c;
+		uint8_t* p = (uint8_t*)buf;
+
+		while (len--)
+		{
+			*p++ = (uint8_t)c;
+		}
+
+		return buf;
 	}
 
-	return buf;
-}
-
-void* memcpy(void* dest, const void* src, size_t len)
-{
-	uint8_t* d = (uint8_t*)dest;
-	const uint8_t* s = (const uint8_t*)src;
-
-	while (len--)
+	void* memcpy(void* dest, const void* src, size_t len)
 	{
-		*d++ = *s++;
+		uint8_t* d = (uint8_t*)dest;
+		const uint8_t* s = (const uint8_t*)src;
+
+		while (len--)
+		{
+			*d++ = *s++;
+		}
+
+		return dest;
 	}
 
-	return dest;
-}
 
-
-void* __memcpy_chk(void* dest, const void* src, size_t len)
-{
-	return memcpy(dest,src, len);
+	void* __memcpy_chk(void* dest, const void* src, size_t len, size_t dstlen)
+	{
+		return memcpy(dest, src, len);
+	}
 }
 
 namespace std
