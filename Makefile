@@ -17,7 +17,7 @@ CXXFLAGS += -I$(INCDIR) -I$(SRCDIR) -I$(X86DIR) -I$(X86SIMPLEOSDIR)
 
 ASFLAGS = --32
 
-OBJS = boot.o X86Main.o Kernel.o Console_x86.o
+OBJS = boot.o X86Main.o memset.o Kernel.o Console_x86.o Pmm.o BaseAddress.o BumpAllocator.o ExtNew.o
 
 KERNEL = myos.bin
 
@@ -31,15 +31,29 @@ $(KERNEL): $(OBJS)
 boot.o: $(X86DIR)/boot.asm
 	$(AS) $(ASFLAGS) $< -o $@
 
-X86Main.o: X86Main.cpp $(SIMPLEOSDIR)/Kernel.hpp $(X86SIMPLEOSDIR)/ExtNew.hpp
+X86Main.o: X86Main.cpp $(SIMPLEOSDIR)/Kernel.hpp $(SIMPLEOSDIR)/ExtNew.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 Kernel.o: $(SIMPLEOSDIR)/Kernel.cpp $(SIMPLEOSDIR)/Kernel.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-Console_x86.o: $(X86SIMPLEOSDIR)/Console.cpp $(X86SIMPLEOSDIR)/Console.hpp $(X86SIMPLEOSDIR)/ExtNew.hpp
+Pmm.o: $(SIMPLEOSDIR)/Pmm.cpp $(SIMPLEOSDIR)/Pmm.hpp $(X86SIMPLEOSDIR)/Console.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+Console_x86.o: $(X86SIMPLEOSDIR)/Console.cpp $(X86SIMPLEOSDIR)/Console.hpp $(SIMPLEOSDIR)/ExtNew.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+memset.o: $(X86SIMPLEOSDIR)/memset.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+BaseAddress.o: $(X86SIMPLEOSDIR)/BaseAddress.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+BumpAllocator.o: $(SIMPLEOSDIR)/BumpAllocator.cpp $(SIMPLEOSDIR)/BumpAllocator.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+ExtNew.o: $(SIMPLEOSDIR)/ExtNew.cpp $(SIMPLEOSDIR)/ExtNew.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS) $(KERNEL) *.o

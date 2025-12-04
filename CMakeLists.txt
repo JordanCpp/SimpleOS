@@ -11,5 +11,9 @@ include_directories("source/Demo")
 
 add_executable(DemoMain 
 "DemoMain.cpp"
+"source/SimpleOS/Pmm.cpp"
+"source/SimpleOS/Kernel.cpp" 
 "source/Demo/SimpleOS/Console.cpp"
-"source/SimpleOS/Kernel.cpp")
+"source/Demo/SimpleOS/BaseAddress.cpp" 
+"source/SimpleOS/BumpAllocator.cpp" 
+"source/SimpleOS/ExtNew.cpp")
