@@ -3,9 +3,8 @@
 
 #include <bitset>
 #include <cstddef>
-#include <cstring>
 #include <cstdint>
-#include <SimpleOS/ExtNew.hpp>
+#include <limits>
 #include <SimpleOS/Hal/HalPmm.hpp>
 
 namespace HAL
@@ -13,6 +12,7 @@ namespace HAL
 	class Pmm : public IPmm
 	{
 	public:
+		const size_t NotFound = std::numeric_limits<size_t>().max();
 		Pmm(uintptr_t address);
 		~Pmm();
 		void* Allocate();

@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include <SimpleOS/Pmm.hpp>
+#include <cstdint>
+#include <SimpleOS/HAL/HalPmm.hpp>
 #include <SimpleOS/Hal/HalAllocator.hpp>
 
 class BumpAllocator : public HAL::IAllocator

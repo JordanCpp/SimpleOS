@@ -17,7 +17,7 @@ void* Pmm::Allocate()
 {
 	size_t index = Find();
 
-	if (index == SIZE_MAX)
+	if (index == NotFound)
 	{
 		return nullptr;
 	}
@@ -54,5 +54,5 @@ size_t Pmm::Find()
 		}
 	}
 
-	return SIZE_MAX;
+	return NotFound;
 }
