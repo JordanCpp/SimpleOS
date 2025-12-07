@@ -17,7 +17,7 @@ CXXFLAGS += -I$(INCDIR) -I$(SRCDIR) -I$(X86DIR) -I$(X86SIMPLEOSDIR)
 
 ASFLAGS = --32
 
-OBJS = boot.o X86Main.o MemoryUtils.o Kernel.o Console.o Pmm.o BaseAddress.o BumpAllocator.o ExtNew.o
+OBJS = boot.o interrupts.o X86Main.o MemoryUtils.o Kernel.o Console.o Pmm.o BaseAddress.o BumpAllocator.o ExtNew.o Interrupt.o InterruptHandler.o InterruptManager.o PicManager.o Platform.o Keyboard.o
 
 KERNEL = myos.bin
 
@@ -29,6 +29,9 @@ $(KERNEL): $(OBJS)
 	$(LD) $(OBJS) -T $(X86DIR)/linker.ld -o $@
 
 boot.o: $(X86DIR)/boot.asm
+	$(AS) $(ASFLAGS) $< -o $@
+
+interrupts.o: $(X86DIR)/interrupts.asm
 	$(AS) $(ASFLAGS) $< -o $@
 
 X86Main.o: X86Main.cpp $(SIMPLEOSDIR)/Kernel.hpp $(SIMPLEOSDIR)/ExtNew.hpp
@@ -55,8 +58,26 @@ BumpAllocator.o: $(SIMPLEOSDIR)/BumpAllocator.cpp $(SIMPLEOSDIR)/BumpAllocator.h
 ExtNew.o: $(SIMPLEOSDIR)/ExtNew.cpp $(SIMPLEOSDIR)/ExtNew.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+Interrupt.o: $(X86SIMPLEOSDIR)/Interrupt.cpp $(X86SIMPLEOSDIR)/Interrupt.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+InterruptHandler.o: $(X86SIMPLEOSDIR)/InterruptHandler.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+InterruptManager.o: $(X86SIMPLEOSDIR)/InterruptManager.cpp $(X86SIMPLEOSDIR)/InterruptManager.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+PicManager.o: $(X86SIMPLEOSDIR)/PicManager.cpp $(X86SIMPLEOSDIR)/PicManager.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+Platform.o: $(X86SIMPLEOSDIR)/Platform.cpp $(X86SIMPLEOSDIR)/Platform.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+Keyboard.o: $(X86SIMPLEOSDIR)/Keyboard.cpp $(X86SIMPLEOSDIR)/Keyboard.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
 	rm -f $(OBJS) $(KERNEL) *.o
 
 run: $(KERNEL)
-	qemu-system-i386 -kernel $(KERNEL)
+	qemu-system-i386 -M pc -cpu pentium -kernel $(KERNEL) -serial stdio

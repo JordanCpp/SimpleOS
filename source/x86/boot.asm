@@ -1,4 +1,5 @@
 
+.section .note.GNU-stack,"",@progbits
 
 .section .multiboot
 .align 4
