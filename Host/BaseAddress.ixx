@@ -1,7 +1,17 @@
 
+module;
+
 #include <cstdlib>
-#include <SimpleOS/Hal/HalConfig.hpp>
-#include <SimpleOS/Hal/HalBaseAddress.hpp>
+#include <cstdint>
+
+export module HAL.BaseAddress;
+
+import HAL.Config;
+
+export namespace HAL
+{
+	uintptr_t BaseAddress();
+}
 
 uintptr_t HAL::BaseAddress()
 {

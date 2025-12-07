@@ -1,9 +1,11 @@
 
-#pragma once
+module;
 
 #include <cstddef>
 
-namespace HAL
+export module HAL.IAllocator;
+
+export namespace HAL
 {
 	class IAllocator
 	{

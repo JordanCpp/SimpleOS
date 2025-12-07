@@ -1,12 +1,15 @@
 
-#pragma once
+module;
 
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
-#include <SimpleOS/ExtNew.hpp>
 
-namespace OS 
+export module String;
+
+import ExtNew;
+
+export namespace OS
 {
     class String 
     {

@@ -1,9 +1,9 @@
 
-#pragma once
+module;
 
-#include <cstdint>
+export module HAL.IConsole;
 
-namespace HAL
+export namespace HAL
 {
 	class IConsole
 	{

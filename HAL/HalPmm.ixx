@@ -1,9 +1,9 @@
 
-#pragma once
+module;
 
-#include <SimpleOS/Hal/HalConfig.hpp>
+export module HAL.IPmm;
 
-namespace HAL
+export namespace HAL
 {
 	class IPmm
 	{

@@ -1,9 +1,9 @@
 
-#pragma once
+module;
 
-#include <cstdint>
+export module HAL.IKeyboard;
 
-namespace HAL
+export namespace HAL
 {
 	class IKeyboard
 	{

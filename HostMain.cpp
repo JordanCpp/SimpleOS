@@ -1,5 +1,5 @@
 
-#include <SimpleOS/Kernel.hpp>
+import Kernel;
 
 int main()
 {

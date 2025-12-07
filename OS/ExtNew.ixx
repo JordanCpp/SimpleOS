@@ -1,8 +1,21 @@
 
-#include <SimpleOS/ExtNew.hpp>
-#include <SimpleOS/Hal/HalAllocator.hpp>
+module;
 
-extern HAL::IAllocator* MainAllocator;
+#include <cstddef>
+
+export module ExtNew;
+
+import HAL.IAllocator;
+import Kernel;
+
+export void* operator new(size_t size);
+export void* operator new[](size_t size);
+
+export void operator delete(void* ptr) noexcept;
+export void operator delete[](void* ptr) noexcept;
+
+export void operator delete(void* ptr, size_t size) noexcept;
+export void operator delete[](void* ptr, size_t size) noexcept;
 
 void* operator new(size_t size)
 {

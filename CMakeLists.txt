@@ -1,20 +1,33 @@
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.20)
 
-project(SimpleOS)
+project(SimpleOS CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF) 
 
-include_directories("include")
-include_directories("source")
-include_directories("source/Demo")
+add_executable(HostMain 
 
-add_executable(DemoMain 
-"DemoMain.cpp"
-"source/Demo/SimpleOS/Platform.cpp" 
-"source/Demo/SimpleOS/Console.cpp"
-"source/Demo/SimpleOS/BaseAddress.cpp" 
-"source/SimpleOS/Pmm.cpp"
-"source/SimpleOS/Kernel.cpp" 
-"source/SimpleOS/BumpAllocator.cpp" 
-"source/SimpleOS/ExtNew.cpp" "source/Demo/SimpleOS/Keyboard.cpp")
+"HAL/HalAllocator.ixx"
+"HAL/HalConfig.ixx"
+"HAL/HalConsole.ixx"
+"HAL/HalKeyboard.ixx"
+"HAL/HalPmm.ixx"
+
+"Host/BaseAddress.ixx"
+"Host/Console.ixx"
+"Host/Keyboard.ixx"
+"Host/Platform.ixx"
+
+"OS/String.ixx"
+"OS/BumpAllocator.ixx"
+"OS/ExtNew.ixx"
+"OS/Kernel.ixx"
+"OS/Pmm.ixx"
+
+"HostMain.cpp")
+
+if(MSVC)
+    target_compile_options(HostMain PRIVATE "/std:c++20")
+endif()

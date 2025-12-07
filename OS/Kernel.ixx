@@ -1,12 +1,46 @@
 
-#include <SimpleOS/Kernel.hpp>
-#include <SimpleOS/STL/String.hpp>
-#include <SimpleOS/BumpAllocator.hpp>
-#include <SimpleOS/Hal/HalBaseAddress.hpp>
+module;
+
+#include <cstdint>
+#include <memory>
+
+export module Kernel;
+
+import HAL.Platform;
+import HAL.BumpAllocator;
+import HAL.BaseAddress;
+import HAL.Pmm;
+import HAL.IConsole;
+import HAL.Console;
+import String;
+
+struct NoDelete
+{
+	void operator()(void* ptr)
+	{
+		(void)ptr;
+	}
+};
+
+export class Kernel
+{
+public:
+	Kernel();
+	~Kernel();
+	void Run();
+private:
+	Platform _platform;
+	alignas(HAL::Pmm)      uint8_t _pmmBuffer[sizeof(HAL::Pmm)];
+	alignas(BumpAllocator) uint8_t _allocatorBuffer[sizeof(BumpAllocator)];
+	HAL::IPmm* _pmm;
+	HAL::IAllocator* _allocator;
+	std::unique_ptr<HAL::IConsole, NoDelete> _console;
+	HAL::IKeyboard* _keyboard;
+};
 
 using namespace HAL;
 
-HAL::IAllocator* MainAllocator = nullptr;
+export HAL::IAllocator* MainAllocator = nullptr;
 
 Kernel::Kernel() :
 	_pmm(nullptr),

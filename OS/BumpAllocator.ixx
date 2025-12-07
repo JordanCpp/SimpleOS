@@ -1,6 +1,30 @@
 
-#include <SimpleOS/BumpAllocator.hpp>
-#include <SimpleOS/Hal/HalBaseAddress.hpp>
+module;
+
+#include <cstdint>
+
+export module HAL.BumpAllocator;
+
+import HAL.Config;
+import HAL.IAllocator;
+import HAL.BaseAddress;
+import HAL.IPmm;
+
+export class BumpAllocator : public HAL::IAllocator
+{
+public:
+    BumpAllocator(HAL::IPmm* pmm);
+    ~BumpAllocator();
+    void* Allocate(size_t size);
+    void Deallocate(void* address);
+private:
+    HAL::IPmm* _pmm;
+    uintptr_t  _start;
+    uintptr_t  _end;
+    uintptr_t  _current;
+};
+
+using namespace HAL;
 
 BumpAllocator::BumpAllocator(HAL::IPmm* pmm) :
     _pmm(pmm),
