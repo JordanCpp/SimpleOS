@@ -1,14 +1,24 @@
 
 #include <SimpleOS/Context.hpp>
 
-HAL::IAllocator* globalAllocator  = nullptr;
-
-HAL::IAllocator* GetAllocatorHandler()
+Context::Context() :
+	_allocator(nullptr)
 {
-	return globalAllocator;
 }
 
-void SetAllocatorHandler(HAL::IAllocator* allocator)
+HAL::IAllocator* Context::GetAllocatorHandler()
 {
-	globalAllocator = allocator;
+	return _allocator;
+}
+
+void Context::SetAllocatorHandler(HAL::IAllocator* allocator)
+{
+	_allocator = allocator;
+}
+
+Context globalContext;
+
+Context& GetContext()
+{
+	return globalContext;
 }

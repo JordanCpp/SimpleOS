@@ -3,14 +3,14 @@
 
 extern "C" void InterruptHandler(int number)
 {
-    GetPicManagerHandler()->Eoi(number);
+    GetContext().GetPicManagerHandler()->Eoi(number);
 
     switch (number)
     {
     case 0x21:
-        if (GetKeyboardHandler())
+        if (GetContext().GetKeyboardHandler())
         {
-            GetKeyboardHandler()->Handle();
+            GetContext().GetKeyboardHandler()->Handle();
         }
         break;
 

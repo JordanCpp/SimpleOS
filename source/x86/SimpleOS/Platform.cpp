@@ -4,11 +4,11 @@
 
 Platform::Platform()
 {
-    SetPicHandler(&_picManager);
+    GetContext().SetPicHandler(&_picManager);
 
     _picManager.Remap(0x20, 0x28);
 
-    SetKeyboardHandler(&_keyboard);
+    GetContext().SetKeyboardHandler(&_keyboard);
 
     _interruptManager.Set(0x20, (void*)isr32);
     _interruptManager.Set(0x21, (void*)isr33);

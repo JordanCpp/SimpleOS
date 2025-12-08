@@ -3,5 +3,14 @@
 
 #include <SimpleOS/HAL/IAllocator.hpp>
 
-HAL::IAllocator* GetAllocatorHandler();
-void SetAllocatorHandler(HAL::IAllocator* allocator);
+class Context
+{
+public:
+	Context();
+	HAL::IAllocator* GetAllocatorHandler();
+	void SetAllocatorHandler(HAL::IAllocator* allocator);
+private:
+	HAL::IAllocator* _allocator;
+};
+
+Context& GetContext();

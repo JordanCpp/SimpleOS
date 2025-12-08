@@ -16,7 +16,7 @@ Kernel::Kernel() :
 	_pmm       = new (_pmmBuffer)       Pmm(BaseAddress());
 	_allocator = new (_allocatorBuffer) BumpAllocator(_pmm);
 
-	SetAllocatorHandler(_allocator);
+	GetContext().SetAllocatorHandler(_allocator);
 
 	_console = std::unique_ptr<HAL::IConsole, NoDelete>(new Console());
 

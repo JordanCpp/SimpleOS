@@ -1,36 +1,46 @@
 
 #include <SimpleOS/Context.hpp>
 
-PicManager*      globalPicManager = nullptr;
-HAL::IKeyboard*  globalKeyboard   = nullptr;
-HAL::IAllocator* globalAllocator  = nullptr;
-
-HAL::IKeyboard* GetKeyboardHandler()
+Context::Context() :
+	_picManager(nullptr),
+	_keyboard(nullptr),
+	_allocator(nullptr)
 {
-	return globalKeyboard;
 }
 
-void SetKeyboardHandler(HAL::IKeyboard* keyboard)
+HAL::IKeyboard* Context::GetKeyboardHandler()
 {
-	globalKeyboard = keyboard;
+	return _keyboard;
 }
 
-PicManager* GetPicManagerHandler()
+void Context::SetKeyboardHandler(HAL::IKeyboard* keyboard)
 {
-	return globalPicManager;
+	_keyboard = keyboard;
 }
 
-void SetPicHandler(PicManager* picManager)
+PicManager* Context::GetPicManagerHandler()
 {
-	globalPicManager = picManager;
+	return _picManager;
 }
 
-HAL::IAllocator* GetAllocatorHandler()
+void Context::SetPicHandler(PicManager* picManager)
 {
-	return globalAllocator;
+	_picManager = picManager;
 }
 
-void SetAllocatorHandler(HAL::IAllocator* allocator)
+HAL::IAllocator* Context::GetAllocatorHandler()
 {
-	globalAllocator = allocator;
+	return _allocator;
+}
+
+void Context::SetAllocatorHandler(HAL::IAllocator* allocator)
+{
+	_allocator = allocator;
+}
+
+Context globalContext;
+
+Context& GetContext()
+{
+	return globalContext;
 }

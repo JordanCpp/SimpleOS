@@ -4,22 +4,22 @@
 
 void* operator new(size_t size)
 {
-    return GetAllocatorHandler()->Allocate(size);
+    return GetContext().GetAllocatorHandler()->Allocate(size);
 }
 
 void* operator new[](size_t size)
 {
-    return GetAllocatorHandler()->Allocate(size);
+    return GetContext().GetAllocatorHandler()->Allocate(size);
 }
 
 void operator delete(void* ptr) noexcept
 {
-    return GetAllocatorHandler()->Deallocate(ptr);
+    return GetContext().GetAllocatorHandler()->Deallocate(ptr);
 }
 
 void operator delete[](void* ptr) noexcept
 {
-    return GetAllocatorHandler()->Deallocate(ptr);
+    return GetContext().GetAllocatorHandler()->Deallocate(ptr);
 }
 
 void operator delete(void* ptr, size_t size) noexcept
