@@ -7,16 +7,16 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories("include")
 include_directories("source")
-include_directories("source/Demo")
+include_directories("source/Host")
 
-add_executable(DemoMain 
-"DemoMain.cpp"
+add_executable(HostMain 
+"HostMain.cpp"
 
-"source/Demo/SimpleOS/Platform.cpp" 
-"source/Demo/SimpleOS/Console.cpp"
-"source/Demo/SimpleOS/BaseAddress.cpp" 
-"source/Demo/SimpleOS/Keyboard.cpp" 
-"source/Demo/SimpleOS/Context.cpp"
+"source/Host/SimpleOS/Platform.cpp" 
+"source/Host/SimpleOS/Console.cpp"
+"source/Host/SimpleOS/BaseAddress.cpp" 
+"source/Host/SimpleOS/Keyboard.cpp" 
+"source/Host/SimpleOS/Context.cpp"
 
 "source/SimpleOS/Pmm.cpp"
 "source/SimpleOS/Kernel.cpp" 

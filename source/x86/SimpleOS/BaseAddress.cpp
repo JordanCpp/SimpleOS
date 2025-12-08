@@ -1,6 +1,6 @@
 
-#include <SimpleOS/Hal/HalConfig.hpp>
-#include <SimpleOS/Hal/HalBaseAddress.hpp>
+#include <SimpleOS/HAL/Config.hpp>
+#include <SimpleOS/HAL/BaseAddress.hpp>
 
 uintptr_t HAL::BaseAddress()
 {

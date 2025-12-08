@@ -2,8 +2,8 @@
 #pragma once
 
 #include <SimpleOS/PicManager.hpp>
-#include <SimpleOS/Hal/HalKeyboard.hpp>
-#include <SimpleOS/HAL/HalAllocator.hpp>
+#include <SimpleOS/HAL/IKeyboard.hpp>
+#include <SimpleOS/HAL/IAllocator.hpp>
 
 HAL::IKeyboard* GetKeyboardHandler();
 void SetKeyboardHandler(HAL::IKeyboard* keyboard);

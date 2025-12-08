@@ -2,12 +2,11 @@
 #include <SimpleOS/Platform.hpp>
 #include <SimpleOS/Context.hpp>
 
-Platform::Platform() :
-    _picManager(nullptr)
+Platform::Platform()
 {
-    SetPicHandler(_picManager);
+    SetPicHandler(&_picManager);
 
-    _picManager->Remap(0x20, 0x28);
+    _picManager.Remap(0x20, 0x28);
 
     SetKeyboardHandler(&_keyboard);
 
@@ -16,7 +15,7 @@ Platform::Platform() :
     _interruptManager.Load();
     _interruptManager.Enable();
 
-    _picManager->Unmask(1);
+    _picManager.Unmask(1);
 }
 
 HAL::IKeyboard* Platform::GetKeyboard()

@@ -3,7 +3,7 @@
 #include <SimpleOS/Context.hpp>
 #include <SimpleOS/STL/String.hpp>
 #include <SimpleOS/BumpAllocator.hpp>
-#include <SimpleOS/Hal/HalBaseAddress.hpp>
+#include <SimpleOS/HAL/BaseAddress.hpp>
 
 using namespace HAL;
 

@@ -5,7 +5,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <limits>
-#include <SimpleOS/Hal/HalPmm.hpp>
+#include <SimpleOS/HAL/IPmm.hpp>
 
 namespace HAL
 {

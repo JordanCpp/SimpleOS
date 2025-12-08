@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <SimpleOS/Hal/HalKeyboard.hpp>
+#include <SimpleOS/HAL/IKeyboard.hpp>
 
 namespace HAL
 {

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <SimpleOS/Hal/HalConfig.hpp>
+#include <SimpleOS/HAL/Config.hpp>
 
 namespace HAL
 {

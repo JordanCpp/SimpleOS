@@ -2,7 +2,7 @@
 #pragma once
 
 #include <SimpleOS/ExtNew.hpp>
-#include <SimpleOS/Hal/HalConsole.hpp>
+#include <SimpleOS/HAL/IConsole.hpp>
 
 namespace HAL
 {

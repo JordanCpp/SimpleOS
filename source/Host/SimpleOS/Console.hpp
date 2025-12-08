@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <SimpleOS/Hal/HalConsole.hpp>
+#include <SimpleOS/HAL/IConsole.hpp>
 
 namespace HAL
 {
