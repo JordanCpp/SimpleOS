@@ -1,25 +1,16 @@
 
-#include <SimpleOS/PicManager.hpp>
-#include <SimpleOS/Hal/HalKeyboard.hpp>
-
-static PicManager picManager;
-HAL::IKeyboard* globalKeyboard = nullptr;
-
-extern "C" void SetKeyboardHandler(HAL::IKeyboard* keyboard) 
-{
-	globalKeyboard = keyboard;
-}
+#include <SimpleOS/Context.hpp>
 
 extern "C" void InterruptHandler(int number)
 {
-    picManager.Eoi(number);
+    GetPicManagerHandler()->Eoi(number);
 
     switch (number)
     {
     case 0x21:
-        if (globalKeyboard)
+        if (GetKeyboardHandler())
         {
-            globalKeyboard->Handle();
+            GetKeyboardHandler()->Handle();
         }
         break;
 

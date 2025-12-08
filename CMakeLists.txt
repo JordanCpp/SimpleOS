@@ -11,10 +11,14 @@ include_directories("source/Demo")
 
 add_executable(DemoMain 
 "DemoMain.cpp"
+
 "source/Demo/SimpleOS/Platform.cpp" 
 "source/Demo/SimpleOS/Console.cpp"
 "source/Demo/SimpleOS/BaseAddress.cpp" 
+"source/Demo/SimpleOS/Keyboard.cpp" 
+"source/Demo/SimpleOS/Context.cpp"
+
 "source/SimpleOS/Pmm.cpp"
 "source/SimpleOS/Kernel.cpp" 
 "source/SimpleOS/BumpAllocator.cpp" 
-"source/SimpleOS/ExtNew.cpp" "source/Demo/SimpleOS/Keyboard.cpp")
+"source/SimpleOS/ExtNew.cpp")

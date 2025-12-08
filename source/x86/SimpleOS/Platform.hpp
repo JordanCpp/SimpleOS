@@ -13,6 +13,6 @@ public:
 	HAL::IKeyboard* GetKeyboard();
 private:
 	HAL::Keyboard    _keyboard;
-	PicManager       _picManager;
+	PicManager*      _picManager;
 	InterruptManager _interruptManager;
 };

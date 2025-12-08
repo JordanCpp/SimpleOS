@@ -17,7 +17,7 @@ CXXFLAGS += -I$(INCDIR) -I$(SRCDIR) -I$(X86DIR) -I$(X86SIMPLEOSDIR)
 
 ASFLAGS = --32
 
-OBJS = boot.o interrupts.o X86Main.o MemoryUtils.o Kernel.o Console.o Pmm.o BaseAddress.o BumpAllocator.o ExtNew.o Interrupt.o InterruptHandler.o InterruptManager.o PicManager.o Platform.o Keyboard.o
+OBJS = boot.o interrupts.o X86Main.o MemoryUtils.o Kernel.o Console.o Pmm.o BaseAddress.o BumpAllocator.o ExtNew.o Interrupt.o InterruptHandler.o InterruptManager.o PicManager.o Platform.o Keyboard.o Context.o
 
 KERNEL = myos.bin
 
@@ -74,6 +74,9 @@ Platform.o: $(X86SIMPLEOSDIR)/Platform.cpp $(X86SIMPLEOSDIR)/Platform.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 Keyboard.o: $(X86SIMPLEOSDIR)/Keyboard.cpp $(X86SIMPLEOSDIR)/Keyboard.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+Context.o: $(X86SIMPLEOSDIR)/Context.cpp $(X86SIMPLEOSDIR)/Context.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:

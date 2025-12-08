@@ -1,27 +1,25 @@
 
 #include <SimpleOS/ExtNew.hpp>
-#include <SimpleOS/Hal/HalAllocator.hpp>
-
-extern HAL::IAllocator* MainAllocator;
+#include <SimpleOS/Context.hpp>
 
 void* operator new(size_t size)
 {
-    return MainAllocator->Allocate(size);
+    return GetAllocatorHandler()->Allocate(size);
 }
 
 void* operator new[](size_t size)
 {
-    return MainAllocator->Allocate(size);
+    return GetAllocatorHandler()->Allocate(size);
 }
 
 void operator delete(void* ptr) noexcept
 {
-    return MainAllocator->Deallocate(ptr);
+    return GetAllocatorHandler()->Deallocate(ptr);
 }
 
 void operator delete[](void* ptr) noexcept
 {
-    return MainAllocator->Deallocate(ptr);
+    return GetAllocatorHandler()->Deallocate(ptr);
 }
 
 void operator delete(void* ptr, size_t size) noexcept
