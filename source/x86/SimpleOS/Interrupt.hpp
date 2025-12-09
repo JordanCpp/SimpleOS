@@ -14,6 +14,11 @@ public:
 class Interrupt 
 {
 public:
+    enum
+    {
+        Timer    = 0x20,
+        Keyboard = 0x21
+    };
     Interrupt();
     void Handler(void* handler);
 private:

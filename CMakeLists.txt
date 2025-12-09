@@ -22,3 +22,9 @@ add_executable(HostMain
 "source/SimpleOS/Kernel.cpp" 
 "source/SimpleOS/BumpAllocator.cpp" 
 "source/SimpleOS/ExtNew.cpp")
+
+
+include_directories("source/x86")
+add_executable(PicManagerTest 
+"source/x86/SimpleOS/PicManager.cpp"
+"tests/PicManagerTest.cpp")

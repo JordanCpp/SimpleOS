@@ -9,7 +9,7 @@
 
 namespace HAL
 {
-	class Pmm : public IPmm
+	class Pmm final : public IPmm
 	{
 	public:
 		const size_t NotFound = std::numeric_limits<size_t>().max();

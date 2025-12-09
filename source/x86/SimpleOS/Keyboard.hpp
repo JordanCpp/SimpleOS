@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <SimpleOS/HAL/IPort.hpp>
 #include <SimpleOS/HAL/IKeyboard.hpp>
 
 namespace HAL
@@ -8,11 +9,12 @@ namespace HAL
 	class Keyboard : public IKeyboard
 	{
 	public:
-		Keyboard();
+		Keyboard(HAL::IPort* port);
 		void Handle();
 		int ReadKey();
 	private:
-		bool _release;
-		int  _key;
+		HAL::IPort* _port;
+		bool        _release;
+		int         _key;
 	};
 }

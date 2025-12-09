@@ -1,8 +1,11 @@
 
-#include <SimpleOS/Platform.hpp>
 #include <SimpleOS/Context.hpp>
+#include <SimpleOS/Platform.hpp>
+#include <SimpleOS/Interrupt.hpp>
 
-Platform::Platform()
+Platform::Platform() :
+    _keyboard(&_port),
+    _picManager(&_port)
 {
     GetContext().SetPicHandler(&_picManager);
 
@@ -10,11 +13,12 @@ Platform::Platform()
 
     GetContext().SetKeyboardHandler(&_keyboard);
 
-    _interruptManager.Set(0x20, (void*)isr32);
-    _interruptManager.Set(0x21, (void*)isr33);
+    _interruptManager.Set(Interrupt::Timer, (void*)isr32);
+    _interruptManager.Set(Interrupt::Keyboard, (void*)isr33);
     _interruptManager.Load();
     _interruptManager.Enable();
 
+    //_picManager.Unmask(0);
     _picManager.Unmask(1);
 }
 

@@ -4,7 +4,8 @@
 
 using namespace HAL;
 
-Keyboard::Keyboard() :
+Keyboard::Keyboard(HAL::IPort* port) :
+	_port(port),
 	_release(false),
 	_key(0)
 {
@@ -12,7 +13,7 @@ Keyboard::Keyboard() :
 
 void Keyboard::Handle()
 {
-	_key = Port::Read<uint8_t>(static_cast<uint8_t>(0x60));
+	_key = _port->Read8(static_cast<uint8_t>(0x60));
 }
 
 int Keyboard::ReadKey()

@@ -1,11 +1,12 @@
 
 #pragma once
 
-#include <cstdint>
+#include <SimpleOS/HAL/IPort.hpp>
 
 class PicManager
 {
 public:
+    PicManager(HAL::IPort* port);
     static constexpr uint16_t MASTER_PIC_COMMAND = 0x20;
     static constexpr uint16_t MASTER_PIC_DATA    = 0x21;
     static constexpr uint16_t SLAVE_PIC_COMMAND  = 0xA0;
@@ -16,4 +17,6 @@ public:
     void Eoi(uint8_t number) const;
     void Unmask(uint8_t irq_line) const;
     void Mask(uint8_t irq_line) const;
+private:
+    HAL::IPort* _port;
 };
